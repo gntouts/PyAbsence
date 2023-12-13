@@ -1,0 +1,16 @@
+version: '3'
+services:
+  pyabsence:
+    container_name: pyabsence
+    image: "docker.io/gntouts/pyabsence:latest"
+    restart: unless-stopped
+    privileged: true
+    network_mode: host
+    environment:
+      PYABS_TRIGGERS: "4a:72:82:79:26:64,e0:dc:ff:3f:23:9e" #comma-separated MAC addresses
+      PYABS_DELAY: 60 # delay between network scans in seconds 
+      PYABS_RETRIES: 5 # amount of consecutive absence detections before sending MQTT message
+      MQTT_BROKER: "127.0.0.1"
+      MQTT_PORT: 1883
+      MQTT_TOPIC: "ha/absence"
+      MQTT_CLIENT: "rouf"
